@@ -1,22 +1,20 @@
 // Test away!
+import React from 'react';
+import * as rtl from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
 
-describe('<Display />', () => {
-  it('displays if gate is open/closed and if it is locked/unlocked', () => {
+import Display from './Display'
 
-  })
-  it(`displays 'Closed' if the closed prop is true and 'Open' if otherwise
-  `, () => {
+// defaults to unlocked and open
 
-  })
-  it(`displays 'Locked' if the locked prop is true and 'Unlocked' if otherwise
-  `, () => {
+test('defaults to unlocked', () => {
+  const wrapper = rtl.render(<Display />);
+  const element = wrapper.getByText(/unlocked/i);
+  expect(element).toBeVisible();
+})
 
-  })
-  it(`when locked or closed use the red-led class
-  `, () => {
-
-  })
-  it('when unlocked or open use the green-led class', () => {
-    
-  })
+test('defaults to open', () => {
+  const wrapper = rtl.render(<Display />);
+  const element = wrapper.getByText(/open/i);
+  expect(element).toBeVisible();
 })
