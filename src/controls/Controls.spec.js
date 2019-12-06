@@ -4,6 +4,7 @@ import * as rtl from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
 import Controls from './Controls'
+import Dashboard from '../dashboard/Dashboard';
 // import Dashboard from '../dashboard/Dashboard';
 
 
@@ -35,15 +36,15 @@ test('button text changes to reflect state when closed is clicked (true)', () =>
   // const closeBtnMock = jest.fn();
   const { getByText } = rtl.render(<Controls closed={true}/>)
 
-  expect(getByText(/Open Gate/i));
-  expect(getByText(/Lock Gate/i));
+  expect(getByText(/Open Gate/i)).toBeVisible();
+  expect(getByText(/Lock Gate/i)).toBeVisible();
 })
 
 test('button text changes to reflect state when closed and locked are clicked (true)', () => {
   const { getByText } = rtl.render(<Controls closed={true} locked={true}  />)
 
-  expect(getByText(/Unlock Gate/i));
-  expect(getByText(/Open Gate/i));
+  expect(getByText(/Unlock Gate/i)).toBeVisible();
+  expect(getByText(/Open Gate/i)).toBeVisible();
 })
 
 // the closed toggle button is disabled if the gate is locked
@@ -60,4 +61,13 @@ test('the locked toggle button is disabled if the gate is open', () => {
   const { getByText } = rtl.render(<Controls closed={false} />);
 
   expect(getByText(/Lock Gate/i)).toHaveProperty('disabled');
+})
+
+// cannot be closed or opened if it is locked
+
+test('cannot be closed or open if locked',  () => {
+  const { getByText } = rtl.render(<Controls closed={true} locked={true} />)
+
+  expect(getByText(/Open Gate/i)).toHaveProperty('disabled');
+
 })

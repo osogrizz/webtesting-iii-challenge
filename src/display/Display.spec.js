@@ -21,6 +21,7 @@ test('defaults to open', () => {
 })
 
 
+
 // displays 'Closed' if the closed prop is true and 'Open' if otherwise
 
 test(`displays 'Closed' if the prop is true`, () => {
